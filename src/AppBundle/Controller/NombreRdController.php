@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class NombreRdController
 {
     /**
-     * @Route("/lucky/number")
+     * @Route("/nombrealeatoire")
      */
 
     public function numberAction()
