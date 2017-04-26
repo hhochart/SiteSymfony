@@ -11,7 +11,7 @@ class NombreRdController
      * @Route("/nombrealeatoire")
      */
 
-    public function numberAction()
+    public function numberAction()  /*Génération de nombre aléatoire*/
     {
         $nombre = mt_rand(0, 100);
 
