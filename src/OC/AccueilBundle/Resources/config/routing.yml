@@ -1,0 +1,3 @@
+oc_accueil_homepage:
+    path:     /accueil
+    defaults: { _controller: OCAccueilBundle:Accueil:Bonjour }
