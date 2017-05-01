@@ -1,7 +1,14 @@
 $premiere_couleur: #ff0000;
 
 * {
+    background-color: lightblue;
+    color: blue;
+}
 
-  background-color: lightblue;
+html {
+    color: $premiere_couleur;
+}
 
+body {
+    color: $premiere_couleur;
 }

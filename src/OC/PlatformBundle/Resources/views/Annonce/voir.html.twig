@@ -1,0 +1,27 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Affichage de l'annonce {{ id_annonce }}</title>
+</head>
+<body>
+<h1>Affichage de l'annonce n°{{ id_annonce }} !</h1>
+
+<div>
+    {# On affiche tous les messages flash dont le nom est « info » #}
+    {% for message in app.session.flashbag.get('info') %}
+        <p>Message flash : {{ message }}</p>
+    {% endfor %}
+</div>
+
+<p>
+    Ici nous pourrons lire l'annonce ayant comme id : {{ id_annonce }}<br />
+    Liste des annonces WIP</p>
+
+    <p>
+        <b><a href="{{ path('oc_platform_voir', { id_annonce: id_annonce_prev }) }}">Annonce précédente</a> </b>
+        <b><a href="{{ path('oc_platform_voir', { id_annonce: id_annonce_next }) }}">Annonce suivante</a> </b>
+    </p>
+</body>
+</html>
