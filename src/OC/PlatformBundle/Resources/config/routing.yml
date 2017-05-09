@@ -3,7 +3,7 @@
 oc_platform_accueil:
     path:      /{page}
     defaults:
-        _controller: OCPlatformBundle:Platform:index
+        _controller: OCPlatformBundle:Annonce:liste
         page: 1
     requirements:
         page: \d*

@@ -1,0 +1,22 @@
+{% extends "OCPlatformBundle:Annonce:template.html.twig" %}
+
+{% block title %}
+    Ajouter une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+    <h2>Ajouter une annonce</h2>
+    <div>
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('retour') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+    {{ include("OCPlatformBundle:Annonce:form.html.twig") }}
+    <p>
+        vous êtes sur le point d'ajouter une annonce. Assurez vous d'avoir bien remplit tous les champs.
+    </p>
+    <p>
+        <a href="{{ path('oc_platform_accueil') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à la liste des annonces</a>
+    </p>
+{% endblock %}

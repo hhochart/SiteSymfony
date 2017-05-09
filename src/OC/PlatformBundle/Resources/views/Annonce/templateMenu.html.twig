@@ -1,0 +1,7 @@
+<ul class="nav nav-pills nav-stacked">
+    {% for annonce in liste_Annonces %}
+    <li>
+        <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}"> {{ annonce.titre }}</a>
+    </li>
+    {% endfor %}
+</ul>

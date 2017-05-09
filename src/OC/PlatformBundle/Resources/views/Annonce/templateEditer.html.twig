@@ -1,0 +1,22 @@
+{% extends "OCPlatformBundle:Annonce:template.html.twig" %}
+
+{% block title %}
+    Modifier une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+    <h2>Modifier une annonce</h2>
+    <div>
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('retour') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+    {{ include("OCPlatformBundle:Annonce:form.html.twig") }}
+    <p>
+        vous éditer une annonce déjà existante, merci de ne pas changer l'idée générale de l'annonce.
+    </p>
+    <p>
+        <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'annonce</a>
+    </p>
+{% endblock %}

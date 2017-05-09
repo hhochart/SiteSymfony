@@ -1,0 +1,20 @@
+{% extends "OCPlatformBundle:Annonce:template.html.twig" %}
+
+{% block title %}
+    Supprimer une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+    <h2>Supprimer une annonce</h2>
+        {# On affiche tous les messages flash dont le nom est « info » #}
+        {% for message in app.session.flashbag.get('retour') %}
+            <div class="alert alert-danger">
+                <p> {{ message }}</p>
+            </div>
+        {% endfor %}
+    {{ include("OCPlatformBundle:Annonce:form.html.twig") }}
+
+    <p>
+        <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'annonce</a>
+    </p>
+{% endblock %}
