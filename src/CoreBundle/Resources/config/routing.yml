@@ -1,0 +1,7 @@
+core_accueil:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:index }
+
+core_contact:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:contact }

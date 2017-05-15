@@ -1,14 +1,3 @@
-$premiere_couleur: #ff0000;
-
-* {
-    background-color: lightblue;
-    color: blue;
-}
-
-html {
-    color: $premiere_couleur;
-}
-
-body {
-    color: $premiere_couleur;
+footer {
+    clear: both;
 }

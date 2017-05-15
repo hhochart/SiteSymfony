@@ -1,12 +1,25 @@
-{% extends "::base.html.twig" %}
+{% extends "CoreBundle:Default:default.html.twig" %}
 
 {% block title %}
     Annonces - {{ parent() }}
 {% endblock %}
 
-{% block body %}
-    <h1>Annonces</h1>
-    <hr>
-    {% block ocplatform_body %}
+{% block container %}
+    <ol class="breadcrumb">Bienvenue sur la section consacrée aux annonces !</ol>
+    {% block menugauche %}
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{{ path('oc_platform_accueil') }}">Accueil</a></li>
+            <li><a href="{{ path('oc_platform_ajouter') }}">Ajouter une annonce</a></li>
+        </ul>
+
+        <h4>Dernières annonces</h4>
+        {{ render(controller("OCPlatformBundle:annonce:menu", {'limit': 3})) }}
+    {% endblock %}
+
+    {% block body %}
+        <h1>Annonces</h1>
+        <hr>
+        {% block ocplatform_body %}
+        {% endblock %}
     {% endblock %}
 {% endblock %}

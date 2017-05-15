@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+{% block menugauche %}
+    <h3>Les annonces</h3>
+    <ul class="nav nav-pills nav-stacked">
+        <li><a href="{{ path('oc_platform_accueil') }}">La plateforme d'annonce</a></li>
+        <li><a href="{{ path('core_contact') }}">Contactez-nous</a></li>
+    </ul>
+{% endblock %}
+{% block body %}
+    Bienvenue sur la page d'accueil !
+{% endblock %}
