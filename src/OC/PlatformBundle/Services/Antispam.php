@@ -1,7 +1,7 @@
 <?php
 
 
-namespace OC\PlatformBundle\Antispam;
+namespace OC\PlatformBundle\Services;
 
 
 class Antispam
@@ -9,7 +9,7 @@ class Antispam
 
     public function __construct(\Swift_Mailer $mailer, $locale, $minlenght)
     {
-        $this->mailer   = $mailer;
+        $this->mailer    = $mailer;
         $this->locale    = $locale;
         $this->minlenght = $minlenght;
     }

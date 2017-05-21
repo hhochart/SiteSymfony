@@ -10,6 +10,7 @@ class AnnonceController extends Controller
 
     public function menuAction($limit)
     {
+
         $listeAnnonces = array(
             array('id_annonce' => 2, 'titre' => 'Recherche d\'un développeur web Symfony'),
             array('id_annonce' => 5, 'titre' => 'Mission pour grahpiste sous Zend'),

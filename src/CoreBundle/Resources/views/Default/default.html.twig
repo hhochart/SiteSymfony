@@ -12,4 +12,19 @@
 {% endblock %}
 {% block body %}
     Bienvenue sur la page d'accueil !
+
+        <h2>Liste des annonces</h2>
+        <ul>
+            {% for annonce in annonces %}
+                <li>
+                    <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}"> {{ annonce.titre }}</a>
+                    par {{ annonce.auteur }}
+                    par {{ annonce.auteur }}
+                    le {{ annonce.date|date('d/m/Y') }}
+                </li>
+            {% else %}
+                <li>Pas encore d'annonce(s)</li>
+            {% endfor %}
+        </ul>
+
 {% endblock %}

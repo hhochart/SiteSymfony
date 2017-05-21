@@ -8,6 +8,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CoreBundle:Default:default.html.twig');
+        $test = $this->get('annonces');
+        var_dump($test);
+        return $this->render('CoreBundle:Default:default.html.twig', array('annonces' => $test));
     }
 }
