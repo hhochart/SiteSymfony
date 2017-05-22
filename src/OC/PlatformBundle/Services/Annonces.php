@@ -8,7 +8,7 @@ class Annonces
 {
     public function __construct()
     {
-        $listeAnnonces = array(
+        $this->listeAnnonces = $listeAnnonces = array(
             array(
                 'id_annonce'  => 2,
                 'titre'       => 'Recherche d\'un développeur web Symfony',

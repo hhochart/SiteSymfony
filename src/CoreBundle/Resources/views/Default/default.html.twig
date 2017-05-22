@@ -19,7 +19,6 @@
                 <li>
                     <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}"> {{ annonce.titre }}</a>
                     par {{ annonce.auteur }}
-                    par {{ annonce.auteur }}
                     le {{ annonce.date|date('d/m/Y') }}
                 </li>
             {% else %}
