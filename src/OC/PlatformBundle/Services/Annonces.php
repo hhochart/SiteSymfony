@@ -38,5 +38,11 @@ class Annonces
                 'date'        => new \Datetime(),
             ),
         );
+
+        $this->tableau_annonces = array();
+        foreach ($this->listeAnnonces as $annonce) {
+            array_push($this->tableau_annonces,$annonce);
+        }
+
     }
 }

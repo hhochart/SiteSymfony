@@ -7,6 +7,8 @@
 {% block ocplatform_body %}
     <h2>Liste des annonces</h2>
     <ul>
+
+
         {% for annonce in liste_annonces %}
             <li>
                 <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}"> {{ annonce.titre }}</a>

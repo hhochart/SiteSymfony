@@ -3,6 +3,7 @@
 namespace CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -13,5 +14,12 @@ class DefaultController extends Controller
         }
 
         return $this->render('CoreBundle:Default:default.html.twig', array('annonces' => $annonces));
+    }
+
+    public function contactAction(Request $requete)
+    {
+        $requete->getSession()->getFlashBag()->add('contact', 'Pas encore de formulaire de contact disponible, revenez plus tard');
+        return $this->redirectToRoute('core_accueil');
+
     }
 }

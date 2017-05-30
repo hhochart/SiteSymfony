@@ -3,5 +3,5 @@ core_accueil:
     defaults: { _controller: CoreBundle:Default:index }
 
 core_contact:
-    path:     /
+    path:     /contact
     defaults: { _controller: CoreBundle:Default:contact }
