@@ -10,4 +10,5 @@ namespace OC\PlatformBundle\Repository;
  */
 class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }
