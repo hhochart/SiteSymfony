@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Echecs fouesnant">
+  <component name="PublishConfigData" serverName="Enesssite">
     <serverData>
       <paths name="Echecs fouesnant">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Enesssite">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="" web="/" />
           </mappings>
         </serverdata>
       </paths>
