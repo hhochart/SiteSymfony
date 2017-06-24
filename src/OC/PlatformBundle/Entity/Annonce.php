@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Annonce
 {
     /**
+     * Annonce constructor.
+     *
+     * @param \DateTime $date
+     */
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -24,7 +33,7 @@ class Annonce
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
@@ -48,6 +57,13 @@ class Annonce
      * @ORM\Column(name="Contenu", type="text")
      */
     private $contenu;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = true;
 
 
     /**
@@ -155,5 +171,28 @@ class Annonce
     {
         return $this->contenu;
     }
-}
 
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Annonce
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+}

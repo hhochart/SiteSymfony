@@ -2,8 +2,11 @@
 
 namespace OC\PlatformBundle\Controller;
 
+use OC\PlatformBundle\Entity\Annonce;
+use OC\PlatformBundle\OCPlatformBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AnnonceController extends Controller
 {
@@ -27,7 +30,7 @@ class AnnonceController extends Controller
     public function listeAction($page)
     {
         $annonce = $this->get('annonces');
-        $test = $annonce->tableau_annonces;
+        $test    = $annonce->tableau_annonces;
 
         return $this->render(
             'OCPlatformBundle:annonce:templateListe.html.twig',
@@ -44,13 +47,15 @@ class AnnonceController extends Controller
         }
         $id_annonce_next = $id_annonce + 1;
 
-        $annonce = array(
-            'id_annonce'  => 2,
-            'titre'       => 'Recherche d\'un développeur web Symfony',
-            'auteur'      => 'Jean',
-            'description' => 'description de l\'annonce pour le dev web symfony',
-            'date'        => new \Datetime(),
-        );
+        $doctrine          = $this->getDoctrine();
+        $em                = $doctrine->getManager();
+        $repertoireAnnonce = $em->getRepository('OCPlatformBundle:Annonce');
+
+        $annonce = $repertoireAnnonce->find($id_annonce);
+
+        if ($annonce === null) {
+            throw new NotFoundHttpException("L'annonce avec l'ID :" . $id_annonce . " n'existe pas");
+        }
 
         return $this->render(
             'OCPlatformBundle:Annonce:templateAnnonce.html.twig',
@@ -64,10 +69,20 @@ class AnnonceController extends Controller
 
     public function ajouterAction(Request $requete)
     {
+        $annonce = new Annonce();
+        $annonce->setTitre('Nouvelle annonce ajoutée en base de données');
+        $annonce->setAuteur('Auteur de la base de données');
+        $annonce->setContenu('Description de la première annonce ajoutée en base de donnée !');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($annonce);
+        $em->flush();
+
+
         if ($requete->isMethod('POST')) {
             $requete->getSession()->getFlashBag()->add('retour', 'Annonce bien enregistrée');
 
-            return $this->redirectToRoute('oc_platform_voir', array('id_annonce' => '5'));
+            return $this->redirectToRoute('oc_platform_voir', array($annonce->getId()));
         }
 
         return $this->render('OCPlatformBundle:Annonce:templateAjouter.html.twig');
@@ -110,6 +125,5 @@ class AnnonceController extends Controller
         }
 
         return $this->render('OCPlatformBundle:Annonce:templateSupprimer.html.twig', array('annonce' => $annonce));
-
     }
 }

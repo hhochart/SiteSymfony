@@ -9,17 +9,17 @@
 <i>par {{ annonce.auteur }} le {{ annonce.date|date('d/m/Y') }}</i>
 
 <div class="well">
-    {{ annonce.description }}
+    {{ annonce.contenu }}
 </div>
 
 <p>
     <a href="{{ path('oc_platform_accueil') }}" class="btn btn-default"> <i class="glyphicon glyphicon-chevron-left"></i>
     Retour à la liste des annonces
     </a>
-    <a href="{{ path('oc_platform_editer', {'id_annonce': annonce.id_annonce }) }}" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i>
+    <a href="{{ path('oc_platform_editer', {'id_annonce': annonce.id }) }}" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i>
     Modifier l'annonce
     </a>
-    <a href="{{ path('oc_platform_supprimer', {'id_annonce': annonce.id_annonce }) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
+    <a href="{{ path('oc_platform_supprimer', {'id_annonce': annonce.id }) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
         Supprimer l'annonce
     </a>
 </p>
