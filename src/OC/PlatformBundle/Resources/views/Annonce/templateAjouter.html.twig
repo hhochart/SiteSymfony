@@ -6,12 +6,6 @@
 
 {% block ocplatform_body %}
     <h2>Ajouter une annonce</h2>
-    <div>
-        {# On affiche tous les messages flash dont le nom est « info » #}
-        {% for message in app.session.flashbag.get('retour') %}
-            <p>Message flash : {{ message }}</p>
-        {% endfor %}
-    </div>
     {{ include("OCPlatformBundle:Annonce:form.html.twig") }}
     <p>
         vous êtes sur le point d'ajouter une annonce. Assurez vous d'avoir bien remplit tous les champs.

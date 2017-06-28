@@ -3,6 +3,7 @@
 namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Annonce;
+use OC\PlatformBundle\Entity\Image;
 use OC\PlatformBundle\OCPlatformBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,10 +70,19 @@ class AnnonceController extends Controller
 
     public function ajouterAction(Request $requete)
     {
+        //création de l'entité Annonce
         $annonce = new Annonce();
         $annonce->setTitre('Nouvelle annonce ajoutée en base de données');
         $annonce->setAuteur('Auteur de la base de données');
         $annonce->setContenu('Description de la première annonce ajoutée en base de donnée !');
+
+        //création de l'entité image
+        $image = new Image();
+        $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
+        $image->setAlt('Job de reve alt');
+
+        //on lie l'image à l'annonce
+        $annonce->setImage($image);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($annonce);
