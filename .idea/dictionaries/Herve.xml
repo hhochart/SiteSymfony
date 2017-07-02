@@ -3,9 +3,11 @@
     <words>
       <w>annonce</w>
       <w>annonces</w>
+      <w>listecandidatures</w>
       <w>nombre</w>
       <w>requete</w>
       <w>retour</w>
+      <w>voir</w>
     </words>
   </dictionary>
 </component>
