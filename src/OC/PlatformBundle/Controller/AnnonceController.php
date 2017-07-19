@@ -42,13 +42,6 @@ class AnnonceController extends Controller
 
     public function voirAction($id_annonce)
     {
-        if ($id_annonce > 1) {
-            $id_annonce_prev = $id_annonce - 1;
-        } else {
-            $id_annonce_prev = 1;
-        }
-        $id_annonce_next = $id_annonce + 1;
-
         $doctrine          = $this->getDoctrine();
         $em                = $doctrine->getManager();
         $repertoireAnnonce = $em->getRepository('OCPlatformBundle:Annonce');
@@ -68,8 +61,6 @@ class AnnonceController extends Controller
             array(
                 'listecandidatures' => $listecandidatures,
                 'annonce'           => $annonce,
-                'id_annonce_prev'   => $id_annonce_prev,
-                'id_annonce_next'   => $id_annonce_next,
             )
         );
     }
