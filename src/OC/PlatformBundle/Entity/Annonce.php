@@ -2,6 +2,7 @@
 
 namespace OC\PlatformBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,14 +14,22 @@ use Doctrine\ORM\Mapping as ORM;
 class Annonce
 {
     /**
+     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Categorie", cascade={"persist"})
+     */
+    private $categories;
+
+    /**
      * Annonce constructor.
      *
-     * @param \DateTime $date
+     * @internal param \DateTime $date
      */
     public function __construct()
     {
-        $this->date = new \DateTime();
+        $this->date       = new \DateTime();
+        $this->categories = new ArrayCollection();
     }
+
+
     /**
      * @var int
      *
@@ -215,4 +224,23 @@ class Annonce
     {
         return $this->published;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function addCategories(Categorie $categorie)
+    {
+        $this->categories[] = $categorie;
+    }
+
+    public function removeCategorie(Categorie $categorie)
+    {
+        $this->categories->removeElement($categorie);
+    }
+
 }

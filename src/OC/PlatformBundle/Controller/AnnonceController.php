@@ -123,13 +123,21 @@ class AnnonceController extends Controller
 
     public function editerAction($id_annonce, Request $requete)
     {
-        $annonce = array(
-            'id_annonce'  => 2,
-            'titre'       => 'Recherche d\'un développeur web Symfony',
-            'auteur'      => 'Jean',
-            'description' => 'description de l\'annonce pour le dev web symfony',
-            'date'        => new \Datetime(),
-        );
+        $em = $this->getDoctrine()->getManager();
+
+        $annonce = $em
+            ->getRepository('OCPlatformBundle:Annonce')
+            ->find($id_annonce);
+
+        $listecategories = $em
+            ->getRepository('OCPlatformBundle:Categorie')
+            ->findAll();
+
+        foreach ($listecategories as $categorie) {
+            $annonce->addCategories($categorie);
+        }
+
+        $em->flush();
 
         if ($requete->isMethod('POST')) {
             $requete->getSession()->getFlashBag()->add('retour', 'Annonce bien modifiée');
@@ -137,25 +145,34 @@ class AnnonceController extends Controller
             return $this->redirectToRoute('oc_platform_voir', array('id_annonce' => $id_annonce));
         }
 
-        return $this->render('OCPlatformBundle:Annonce:templateEditer.html.twig', array('annonce' => $annonce));
+        return $this->render(
+            'OCPlatformBundle:Annonce:templateEditer.html.twig',
+            array('annonce' => $annonce, 'id_annonce' => $id_annonce)
+        );
     }
 
     public function supprimerAction($id_annonce, Request $requete)
     {
-        $annonce = array(
-            'id_annonce'  => 2,
-            'titre'       => 'Recherche d\'un développeur web Symfony',
-            'auteur'      => 'Jean',
-            'description' => 'description de l\'annonce pour le dev web symfony',
-            'date'        => new \Datetime(),
-        );
+        $em = $this->getDoctrine()->getManager();
+
+        $annonce = $em->getRepository('OCPlatformBundle:Annonce')->find($id_annonce);
+
+        foreach ($annonce->getCategories() as $categorie) {
+            $annonce->removeCategorie($categorie);
+        }
+
+        $em->flush();
 
         if ($requete->isMethod('POST')) {
             $requete->getSession()->getFlashBag()->add('retour', 'Annonce bien supprimée');
 
             return $this->redirectToRoute('oc_platform_voir', array('id_annonce' => $id_annonce));
+        } else {
+            $requete->getSession()->getFlashBag()->add('retour', 'catégorie bien supprimée');
+
+            return $this->redirectToRoute('oc_platform_voir', array('id_annonce' => $id_annonce));
         }
 
-        return $this->render('OCPlatformBundle:Annonce:templateSupprimer.html.twig', array('annonce' => $annonce));
+//        return $this->render('OCPlatformBundle:Annonce:templateSupprimer.html.twig', array('annonce' => $annonce, 'id_annonce' => $id_annonce));
     }
 }
