@@ -40,6 +40,7 @@ class AnnonceController extends Controller
         );
     }
 
+
     public function voirAction($id_annonce)
     {
         $doctrine          = $this->getDoctrine();
