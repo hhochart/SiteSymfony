@@ -3,6 +3,7 @@
 namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Annonce;
+use OC\PlatformBundle\Entity\AnnonceCompetence;
 use OC\PlatformBundle\Entity\Application;
 use OC\PlatformBundle\Entity\Image;
 use OC\PlatformBundle\OCPlatformBundle;
@@ -67,11 +68,29 @@ class AnnonceController extends Controller
 
     public function ajouterAction(Request $requete)
     {
+        $em = $this->getDoctrine()->getManager();
         //création de l'entité Annonce
         $annonce = new Annonce();
         $annonce->setTitre('Nouvelle annonce ajoutée en base de données');
         $annonce->setAuteur('Auteur de la base de données');
         $annonce->setContenu('Description de la première annonce ajoutée en base de donnée !');
+
+        //récupération des compétences avec doctrine
+        $competences = $em->getRepository('OCPlatformBundle:Competence')->findAll();
+
+        foreach ($competences as $competence) {
+            $annonceCompetence = new AnnonceCompetence();
+            $annonceCompetence->setCompetence($competence);
+            $annonceCompetence->setAnnonce($annonce);
+
+//            choisi arbitrairement pour l'instant
+            $annonceCompetence->setNiveau('Expert');
+
+            $em->persist($annonceCompetence);
+        }
+
+        //Création de l'entité Competence
+
 
         //création de l'entité annonce 1
         $application1 = new Application();
@@ -83,15 +102,9 @@ class AnnonceController extends Controller
         $application2->setAuteur('Auteur de la deuxième candidature');
         $application2->setContenu('Contenu de la deuxième candidature');
 
-        //création de l'entité annonce 2
-        $application3 = new Application();
-        $application3->setAuteur('Auteur de la troisième candidature');
-        $application3->setContenu('Contenu de la troisième candidature');
-
         //on lie les candidatures à l'annonce
         $application1->setAnnonce($annonce);
         $application2->setAnnonce($annonce);
-        $application3->setAnnonce($annonce);
 
         //création de l'entité image
         $image = new Image();
@@ -102,12 +115,10 @@ class AnnonceController extends Controller
         $annonce->setImage($image);
 
         //récupération de l'entity manager + persistance et envoie en bdd (flush)
-        $em = $this->getDoctrine()->getManager();
         $em->persist($annonce);
         //persistance des candidatures puisque la relation n'est pas en cascade
         $em->persist($application1);
         $em->persist($application2);
-        $em->persist($application3);
         $em->flush();
 
 
@@ -173,6 +184,5 @@ class AnnonceController extends Controller
             return $this->redirectToRoute('oc_platform_voir', array('id_annonce' => $id_annonce));
         }
 
-//        return $this->render('OCPlatformBundle:Annonce:templateSupprimer.html.twig', array('annonce' => $annonce, 'id_annonce' => $id_annonce));
     }
 }

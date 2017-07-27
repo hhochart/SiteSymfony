@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="application")
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\ApplicationRepository")
  */
+
+
 class Application
 {
     /**
@@ -70,7 +72,7 @@ class Application
     /**
      * Application constructor.
      *
-     * @param \DateTime $date
+     * @internal param \DateTime $date
      */
     public function __construct()
     {
