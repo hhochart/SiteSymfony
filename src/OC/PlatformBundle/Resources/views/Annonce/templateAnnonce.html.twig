@@ -5,60 +5,75 @@
 {% endblock %}
 
 {% block ocplatform_body %}
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        {% if annonce.image is not null %}
-        <div class="thumbnail">
-            <img src="{{ annonce.image.url }}" alt=" {{ annonce.image.alt }}">
-            {% else %}
-                <div class="btn btn-danger">
-                    Aucune image pour cette annonce
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            {% if annonce.image is not null %}
+            <div class="thumbnail">
+                <img src="{{ annonce.image.url }}" alt=" {{ annonce.image.alt }}">
+                {% else %}
+                    <div class="btn btn-danger">
+                        Aucune image pour cette annonce
+                    </div>
+                {% endif %}
+                <div class="caption">
+                    <h3>{{ annonce.titre }}</h3>
+                    <p>{{ annonce.contenu }}</p>
+                    <i>par {{ annonce.auteur }} le {{ annonce.date|date('d/m/Y') }}</i>
                 </div>
-            {% endif %}
-            <div class="caption">
-                <h3>{{ annonce.titre }}</h3>
-                <p>{{ annonce.contenu }}</p>
-                <i>par {{ annonce.auteur }} le {{ annonce.date|date('d/m/Y') }}</i>
-            </div>
                 {% if not annonce.categories.empty %}
-                <p>
+                    <p>
                         {% for categorie in annonce.categories %}
                             <span class="label label-info" style="margin: 5px;">
                                 {{ categorie.nom }}
                             </span>
                         {% endfor %}
-                </p>
+                    </p>
                 {% endif %}
+
+                {% if listeannoncecompetence|length > 0 %}
+                    <ul>
+                        {% for annoncecompetence in listeannoncecompetence %}
+                            <li style="list-style-type: none;">
+                                <i class="glyphicon glyphicon-star"></i>
+                                <b>
+                                    {{ annoncecompetence.competence.name }} :
+                                </b>
+                                {{ annoncecompetence.niveau }}
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 
 
-{% for candidature in listecandidatures %}
-    <div class="panel panel-default">
-        <div class="panel-heading">{{ candidature.auteur }} - <b>{{ candidature.date|date('d/m/Y') }}</b></div>
-        <div class="panel-body">
-            {{ candidature.contenu }}
+    {% for candidature in listecandidatures %}
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ candidature.auteur }} - <b>{{ candidature.date|date('d/m/Y') }}</b></div>
+            <div class="panel-body">
+                {{ candidature.contenu }}
+            </div>
         </div>
-    </div>
-{% else %}
-    Aucune candidature pour cette annonce
-{% endfor %}
+    {% else %}
+        Aucune candidature pour cette annonce
+    {% endfor %}
 
 
-<p>
-    <a href="{{ path('oc_platform_accueil') }}" class="btn btn-default"> <i
-                class="glyphicon glyphicon-chevron-left"></i>
-        Retour à la liste des annonces
-    </a>
-    <a href="{{ path('oc_platform_editer', {'id_annonce': annonce.id }) }}" class="btn btn-default"><i
-                class="glyphicon glyphicon-edit"></i>
-        Modifier l'annonce
-    </a>
-    <a href="{{ path('oc_platform_supprimer', {'id_annonce': annonce.id }) }}" class="btn btn-danger"><i
-                class="glyphicon glyphicon-trash"></i>
-        Supprimer l'annonce
-    </a>
-</p>
+    <p>
+        <a href="{{ path('oc_platform_accueil') }}" class="btn btn-default"> <i
+                    class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la liste des annonces
+        </a>
+        <a href="{{ path('oc_platform_editer', {'id_annonce': annonce.id }) }}" class="btn btn-default"><i
+                    class="glyphicon glyphicon-edit"></i>
+            Modifier l'annonce
+        </a>
+        <a href="{{ path('oc_platform_supprimer', {'id_annonce': annonce.id }) }}" class="btn btn-danger"><i
+                    class="glyphicon glyphicon-trash"></i>
+            Supprimer l'annonce
+        </a>
+    </p>
 
 {% endblock %}

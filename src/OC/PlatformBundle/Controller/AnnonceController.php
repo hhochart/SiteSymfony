@@ -57,11 +57,16 @@ class AnnonceController extends Controller
             ->getRepository('OCPlatformBundle:Application')
             ->findBy(array('annonce' => $id_annonce));
 
+        $listecompetences = $em
+            ->getRepository('OCPlatformBundle:AnnonceCompetence')
+            ->findBy(array('annonce' => $annonce));
+
         return $this->render(
             'OCPlatformBundle:Annonce:templateAnnonce.html.twig',
             array(
                 'listecandidatures' => $listecandidatures,
                 'annonce'           => $annonce,
+                'listeannoncecompetence'       => $listecompetences,
             )
         );
     }
