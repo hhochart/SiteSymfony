@@ -64,9 +64,9 @@ class AnnonceController extends Controller
         return $this->render(
             'OCPlatformBundle:Annonce:templateAnnonce.html.twig',
             array(
-                'listecandidatures' => $listecandidatures,
-                'annonce'           => $annonce,
-                'listeannoncecompetence'       => $listecompetences,
+                'listecandidatures'      => $listecandidatures,
+                'annonce'                => $annonce,
+                'listeannoncecompetence' => $listecompetences,
             )
         );
     }

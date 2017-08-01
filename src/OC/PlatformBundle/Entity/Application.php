@@ -46,7 +46,7 @@ class Application
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Annonce", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Annonce", cascade={"persist"}, inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $annonce;

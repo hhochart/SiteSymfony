@@ -25,8 +25,9 @@ class Annonce
      */
     public function __construct()
     {
-        $this->date       = new \DateTime();
-        $this->categories = new ArrayCollection();
+        $this->date         = new \DateTime();
+        $this->categories   = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
 
@@ -243,4 +244,71 @@ class Annonce
         $this->categories->removeElement($categorie);
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity="OC\PlatformBundle\Entity\Application", mappedBy="annonce")
+     */
+    private $applications;
+
+    /**
+     * Add category
+     *
+     * @param \OC\PlatformBundle\Entity\Categorie $category
+     *
+     * @return Annonce
+     */
+    public function addCategory(\OC\PlatformBundle\Entity\Categorie $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \OC\PlatformBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\OC\PlatformBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Add application
+     *
+     * @param \OC\PlatformBundle\Entity\Application $application
+     *
+     * @return Annonce
+     */
+    public function addApplication(\OC\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+
+        $application->setAnnonce($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \OC\PlatformBundle\Entity\Application $application
+     */
+    public function removeApplication(\OC\PlatformBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+
+        // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :
+        // $application->setAdvert(null);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
 }
