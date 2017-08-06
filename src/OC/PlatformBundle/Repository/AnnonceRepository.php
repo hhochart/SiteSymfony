@@ -11,4 +11,15 @@ namespace OC\PlatformBundle\Repository;
 class AnnonceRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function getAnnonceWithCategories(array $nomCategories) {
+        $qb = $this
+            ->createQueryBuilder('a')
+            ->innerJoin('a.categories', 'cat')
+            ->addSelect('cat');
+
+        $qb->where($qb->expr()->in('cat.nom', $nomCategories));
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
