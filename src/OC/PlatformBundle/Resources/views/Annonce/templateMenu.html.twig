@@ -1,7 +1,7 @@
 <ul class="nav nav-pills nav-stacked">
-    {% for annonce in liste_Annonces %}
+    {% for annonce in annonces %}
     <li>
-        <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id_annonce}) }}"> {{ annonce.titre }}</a>
+        <a href="{{ path('oc_platform_voir', {'id_annonce': annonce.id}) }}"> {{ annonce.titre }}</a>
     </li>
     {% endfor %}
 </ul>

@@ -5,5 +5,3 @@ services:
         - "@mailer"
         - '%locale'
         - 50
-    annonces:
-        class: OC\PlatformBundle\Services\Annonces

@@ -17,27 +17,22 @@ class AnnonceController extends Controller
     public function menuAction($limit)
     {
 
-        $listeAnnonces = array(
-            array('id_annonce' => 2, 'titre' => 'Recherche d\'un développeur web Symfony'),
-            array('id_annonce' => 5, 'titre' => 'Mission pour grahpiste sous Zend'),
-            array('id_annonce' => 7, 'titre' => 'Refonte d\un site e-commerce Magento'),
-            array('id_annonce' => 16, 'titre' => 'Recherche d\'un développeur web Wordpress'),
-        );
+        $annonces = $this->getDoctrine()->getManager()->getRepository('OCPlatformBundle:Annonce')->getLastAnnonces(5);
 
         return $this->render(
             'OCPlatformBundle:Annonce:templateMenu.html.twig',
-            array('liste_Annonces' => $listeAnnonces)
+            array('annonces' => $annonces)
         );
     }
 
     public function listeAction($page)
     {
-        $annonce = $this->get('annonces');
-        $test    = $annonce->tableau_annonces;
+        $em = $this->getDoctrine()->getManager();
+        $annonces = $em->getRepository('OCPlatformBundle:Annonce')->getLastAnnonces(5);
 
         return $this->render(
             'OCPlatformBundle:annonce:templateListe.html.twig',
-            array('liste_annonces' => $test)
+            array('annonces' => $annonces)
         );
     }
 
